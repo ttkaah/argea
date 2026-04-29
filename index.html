@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── SEO ── -->
+  <title>ARGEA — Valorant eSports Organization</title>
+  <meta name="description" content="Argea es una organización de eSports centrada en Valorant. Tres equipos, un mismo espíritu competitivo: Vira, Luma y Nira." />
+  <meta name="keywords" content="Argea, eSports, Valorant, Vira, Luma, Nira, equipo, competitivo, gaming" />
+  <meta name="author" content="Argea eSports" />
+  <meta name="theme-color" content="#0e8f65" />
+
+  <!-- ── OPEN GRAPH (Discord, Facebook, WhatsApp) ── -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ttkaah.github.io/argea" />
+  <meta property="og:title" content="ARGEA — Valorant eSports Organization" />
+  <meta property="og:description" content="Tres equipos, un mismo espíritu competitivo. Explora el roster, torneos y más." />
+  <meta property="og:image" content="https://ttkaah.github.io/argea/og_image.png" />
+  <meta property="og:image:width" content="1080" />
+  <meta property="og:image:height" content="1080" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content="Argea eSports" />
+
+  <!-- ── TWITTER / X CARD ── -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@Argea_" />
+  <meta name="twitter:title" content="ARGEA — Valorant eSports Organization" />
+  <meta name="twitter:description" content="Tres equipos, un mismo espíritu competitivo. Explora el roster, torneos y más." />
+  <meta name="twitter:image" content="https://ttkaah.github.io/argea/og_image.png" />
+
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ══════════ LOADER ══════════ -->
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-logo">
+      <img src="logo_hero.png" alt="Argea" />
+    </div>
+    <div class="loader-name">ARG<span>EA</span></div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ BACK TO TOP ══════════ -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Volver arriba">
+  ↑
+</button>
+
+<!-- ══════════ NAV ══════════ -->
+<nav>
+  <div class="nav-left">
+    <a class="nav-brand" href="#">
+      <img src="logo_nav.png" alt="Argea" style="height:36px;width:auto;" />
+    </a>
+    <button class="lang-toggle" id="langBtn" onclick="toggleLang()">EN</button>
+  </div>
+  <ul class="nav-center">
+    <li><a href="#quienes-somos" data-es="Nosotros" data-en="About">Nosotros</a></li>
+    <li><a href="#roster-vira" data-es="Roster" data-en="Roster">Roster</a></li>
+    <li><a href="#torneos" data-es="Torneos" data-en="Tournaments">Torneos</a></li>
+    <li><a href="#tryouts" data-es="Tryouts" data-en="Tryouts">Tryouts</a></li>
+    <li><a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://discord.gg/3uXfdSXyD" target="_blank" class="nav-social">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.032.056a19.908 19.908 0 0 0 5.993 3.03.077.077 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+      Discord
+    </a>
+    <a href="https://x.com/Argea_" target="_blank" class="nav-social">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      Twitter
+    </a>
+    <a href="https://www.twitch.tv/4rgea" target="_blank" class="nav-social">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+      Twitch
+    </a>
+  </div>
+</nav>
+
+<div class="main-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label" data-es="Novedades" data-en="News">Novedades</div>
+      <div id="sidebar-news">
+      <div class="news-item">
+        <div class="news-date" data-es="Abr 2026" data-en="Apr 2026">Abr 2026</div>
+        <div class="news-title" data-es="¡Argea ya tiene web oficial! Explora equipos, roster y mucho más." data-en="Argea now has an official website! Explore teams, rosters and more.">¡Argea ya tiene web oficial! Explora equipos, roster y mucho más.</div>
+        <div class="news-tag">🎉 <span data-es="Nuevo" data-en="New">Nuevo</span></div>
+      </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-glow"></div>
+
+      <!-- GRAFFITI BACKGROUND -->
+      <div class="hero-graffiti" aria-hidden="true">
+        <svg class="graffiti-svg" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <filter id="inkblob" x="-20%" y="-20%" width="140%" height="140%">
+              <feTurbulence type="turbulence" baseFrequency="0.04" numOctaves="4" seed="2" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="spraydots" x="-30%" y="-30%" width="160%" height="160%">
+              <feTurbulence type="turbulence" baseFrequency="0.85" numOctaves="3" result="noise"/>
+              <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -3 3.2" result="mask"/>
+              <feComposite in="SourceGraphic" in2="mask" operator="in"/>
+            </filter>
+            <filter id="dripwobble" x="-5%" width="110%">
+              <feTurbulence type="turbulence" baseFrequency="0.015 0" numOctaves="2" seed="5" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R"/>
+            </filter>
+            <filter id="textrough" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="3"/>
+            </filter>
+          </defs>
+
+          <!-- ── LIGHT GRUNGE BACKGROUND ── -->
+          <rect x="0" y="0" width="1400" height="900" fill="#e8ede8" opacity="0.08"/>
+
+          <!-- Big ink splat blobs - black -->
+          <ellipse cx="900" cy="350" rx="320" ry="280" fill="#000000" opacity="0.12" filter="url(#inkblob)"/>
+          <ellipse cx="920" cy="340" rx="260" ry="230" fill="#111" opacity="0.1" filter="url(#inkblob)"/>
+
+          <!-- Green paint splash right side - like the logo area -->
+          <ellipse cx="1000" cy="380" rx="260" ry="300" fill="#009d70" opacity="0.25" filter="url(#inkblob)"/>
+          <ellipse cx="980" cy="360" rx="200" ry="240" fill="#009d70" opacity="0.2" filter="url(#inkblob)"/>
+          <ellipse cx="1050" cy="420" rx="150" ry="180" fill="#00ff9d" opacity="0.12" filter="url(#inkblob)"/>
+
+          <!-- Bottom left ink splash -->
+          <ellipse cx="80" cy="820" rx="200" ry="120" fill="#000" opacity="0.15" filter="url(#inkblob)"/>
+          <ellipse cx="1350" cy="800" rx="180" ry="110" fill="#009d70" opacity="0.18" filter="url(#inkblob)"/>
+
+          <!-- Top scattered ink -->
+          <ellipse cx="200" cy="80" rx="180" ry="80" fill="#000" opacity="0.08" filter="url(#inkblob)"/>
+          <ellipse cx="1200" cy="60" rx="150" ry="70" fill="#009d70" opacity="0.1" filter="url(#inkblob)"/>
+
+          <!-- ── ARGEA - BLACK GRAFFITI LETTERS ── -->
+          <!-- Shadow layer -->
+          <text x="58" y="408" font-family="Impact,Arial Black,sans-serif" font-size="340" font-weight="900"
+            fill="#1a1a1a" opacity="0.12" filter="url(#textrough)" letter-spacing="-8">ARGEA</text>
+          <!-- Dark outline thick -->
+          <text x="52" y="400" font-family="Impact,Arial Black,sans-serif" font-size="340" font-weight="900"
+            fill="none" stroke="#0a0a0a" stroke-width="22" stroke-linejoin="round"
+            opacity="0.65" filter="url(#textrough)" letter-spacing="-8">ARGEA</text>
+          <!-- Black fill -->
+          <text x="52" y="400" font-family="Impact,Arial Black,sans-serif" font-size="340" font-weight="900"
+            fill="#0d0d0d" opacity="0.62" filter="url(#textrough)" letter-spacing="-8">ARGEA</text>
+          <!-- Green accent inner glow -->
+          <text x="52" y="400" font-family="Impact,Arial Black,sans-serif" font-size="340" font-weight="900"
+            fill="none" stroke="#009d70" stroke-width="5"
+            opacity="0.4" letter-spacing="-8">ARGEA</text>
+          <!-- White highlight top edge -->
+          <text x="52" y="400" font-family="Impact,Arial Black,sans-serif" font-size="340" font-weight="900"
+            fill="none" stroke="white" stroke-width="2"
+            opacity="0.15" letter-spacing="-8">ARGEA</text>
+
+          <!-- ── REALISTIC INK DRIPS from letters ── -->
+          <!-- Drip from A (first) -->
+          <g filter="url(#dripwobble)">
+            <path d="M115 405 C114 430 116 460 114 495 C113 520 115 545 113 570 C112 590 114 610 112 628" stroke="#0d0d0d" stroke-width="10" fill="none" opacity="0.65" stroke-linecap="round"/>
+            <path d="M112 628 Q108 650 112 665 Q116 678 112 665 Q108 650 115 635 Z" fill="#0d0d0d" opacity="0.65"/>
+            <ellipse cx="112" cy="670" rx="8" ry="13" fill="#0d0d0d" opacity="0.6"/>
+          </g>
+          <!-- Drip from A thin -->
+          <g filter="url(#dripwobble)">
+            <path d="M155 405 C154 425 156 450 154 475 C153 495 155 515 153 535" stroke="#0d0d0d" stroke-width="5" fill="none" opacity="0.45" stroke-linecap="round"/>
+            <ellipse cx="153" cy="542" rx="5" ry="9" fill="#0d0d0d" opacity="0.45"/>
+          </g>
+
+          <!-- Drip from R -->
+          <g filter="url(#dripwobble)">
+            <path d="M318 405 C317 435 319 470 317 510 C316 540 318 570 316 600 C315 625 317 648 315 668" stroke="#0d0d0d" stroke-width="12" fill="none" opacity="0.6" stroke-linecap="round"/>
+            <ellipse cx="315" cy="676" rx="10" ry="16" fill="#0d0d0d" opacity="0.6"/>
+          </g>
+          <g filter="url(#dripwobble)">
+            <path d="M355 405 C354 422 356 442 354 462 C353 478 355 495 353 510" stroke="#0d0d0d" stroke-width="5" fill="none" opacity="0.4" stroke-linecap="round"/>
+            <ellipse cx="353" cy="517" rx="5" ry="8" fill="#0d0d0d" opacity="0.4"/>
+          </g>
+
+          <!-- Drip from G - green drip! -->
+          <g filter="url(#dripwobble)">
+            <path d="M525 405 C524 440 526 480 524 520 C523 555 525 585 523 612" stroke="#009d70" stroke-width="11" fill="none" opacity="0.7" stroke-linecap="round"/>
+            <ellipse cx="523" cy="620" rx="10" ry="15" fill="#009d70" opacity="0.7"/>
+          </g>
+          <g filter="url(#dripwobble)">
+            <path d="M565 405 C564 428 566 455 564 480 C563 500 565 518 563 535" stroke="#009d70" stroke-width="5" fill="none" opacity="0.5" stroke-linecap="round"/>
+            <ellipse cx="563" cy="542" rx="5" ry="9" fill="#009d70" opacity="0.5"/>
+          </g>
+
+          <!-- Drip from E -->
+          <g filter="url(#dripwobble)">
+            <path d="M720 405 C719 432 721 465 719 500 C718 528 720 555 718 580 C717 600 719 620 717 638" stroke="#0d0d0d" stroke-width="9" fill="none" opacity="0.58" stroke-linecap="round"/>
+            <ellipse cx="717" cy="646" rx="8" ry="13" fill="#0d0d0d" opacity="0.58"/>
+          </g>
+          <g filter="url(#dripwobble)">
+            <path d="M758 405 C757 420 759 438 757 455 C756 468 758 482 756 495" stroke="#0d0d0d" stroke-width="4" fill="none" opacity="0.38" stroke-linecap="round"/>
+            <ellipse cx="756" cy="501" rx="4" ry="7" fill="#0d0d0d" opacity="0.38"/>
+          </g>
+
+          <!-- Drip from second A -->
+          <g filter="url(#dripwobble)">
+            <path d="M918 405 C917 438 919 475 917 515 C916 548 918 578 916 605 C915 628 917 650 915 670" stroke="#0d0d0d" stroke-width="11" fill="none" opacity="0.62" stroke-linecap="round"/>
+            <ellipse cx="915" cy="678" rx="9" ry="15" fill="#0d0d0d" opacity="0.62"/>
+          </g>
+          <g filter="url(#dripwobble)">
+            <path d="M955 405 C954 425 956 448 954 470 C953 488 955 505 953 520" stroke="#009d70" stroke-width="5" fill="none" opacity="0.48" stroke-linecap="round"/>
+            <ellipse cx="953" cy="527" rx="5" ry="8" fill="#009d70" opacity="0.48"/>
+          </g>
+
+          <!-- ── SPRAY PAINT SPLATTER DOTS ── -->
+          <!-- Around the letters - black ink dots -->
+          <g opacity="0.55" filter="url(#spraydots)">
+            <circle cx="30" cy="120" r="22" fill="#111"/>
+            <circle cx="65" cy="95" r="14" fill="#111"/>
+            <circle cx="20" cy="160" r="16" fill="#111"/>
+            <circle cx="85" cy="110" r="9" fill="#111"/>
+            <circle cx="15" cy="85" r="7" fill="#111"/>
+            <circle cx="100" cy="85" r="11" fill="#111"/>
+            <circle cx="45" cy="70" r="8" fill="#111"/>
+            <circle cx="110" cy="135" r="6" fill="#111"/>
+            <circle cx="5" cy="200" r="10" fill="#111"/>
+          </g>
+          <!-- Green spray right side -->
+          <g opacity="0.6" filter="url(#spraydots)">
+            <circle cx="1100" cy="200" r="25" fill="#009d70"/>
+            <circle cx="1140" cy="170" r="16" fill="#009d70"/>
+            <circle cx="1080" cy="240" r="18" fill="#009d70"/>
+            <circle cx="1160" cy="210" r="11" fill="#00ff9d"/>
+            <circle cx="1070" cy="180" r="9" fill="#00ff9d"/>
+            <circle cx="1175" cy="250" r="13" fill="#009d70"/>
+            <circle cx="1120" cy="155" r="8" fill="#00ff9d"/>
+          </g>
+          <!-- Bottom ink splatter -->
+          <g opacity="0.45" filter="url(#spraydots)">
+            <circle cx="50" cy="850" r="20" fill="#111"/>
+            <circle cx="85" cy="870" r="12" fill="#111"/>
+            <circle cx="30" cy="830" r="14" fill="#111"/>
+            <circle cx="110" cy="855" r="8" fill="#111"/>
+            <circle cx="1300" cy="840" r="18" fill="#009d70"/>
+            <circle cx="1335" cy="860" r="11" fill="#009d70"/>
+            <circle cx="1275" cy="825" r="14" fill="#00ff9d"/>
+          </g>
+
+          <!-- ── DIAGONAL BRUSH STROKES ── -->
+          <line x1="0" y1="0" x2="180" y2="900" stroke="#000" stroke-width="2" opacity="0.06"/>
+          <line x1="1400" y1="0" x2="1220" y2="900" stroke="#000" stroke-width="2" opacity="0.06"/>
+
+          <!-- Bottom border ink smear -->
+          <rect x="0" y="880" width="1400" height="20" fill="#000" opacity="0.12" filter="url(#inkblob)"/>
+          <rect x="0" y="885" width="700" height="8" fill="#009d70" opacity="0.2" filter="url(#inkblob)"/>
+        </svg>
+      </div>
+      <div class="hero-top">
+        <div class="hero-brand">
+          <div class="hero-logo"><img src="logo_hero.png" alt="Argea" /></div>
+          <h1>ARG<span>EA</span></h1>
+          <div class="hero-line"></div>
+        </div>
+
+        <!-- 10MANS CENTER PANEL -->
+        <div class="hero-10mans">
+          <div class="tens-label" data-es="10Mans" data-en="10Mans">10Mans</div>
+          <p class="tens-text" data-es="¿Quieres darte a conocer en Valorant? Únete a nuestras 10mans y demuestra de lo que eres capaz. ¿Eres un equipo en busca de jugadores? Observa talento en acción y encuentra a tu próximo fichaje. ¿Eres jugador y buscas equipo? Este es tu momento para brillar. Compite, destaca y haz que te vean." data-en="Do you want to make a name for yourself in Valorant? Join our 10mans and prove what you're capable of. Are you a team looking for players? Watch talent in action and find your next recruit. Are you a player looking for a team? This is your moment to shine. Compete, stand out, and get noticed.">¿Quieres darte a conocer en Valorant? Únete a nuestras 10mans y demuestra de lo que eres capaz. ¿Eres un equipo en busca de jugadores? Observa talento en acción y encuentra a tu próximo fichaje. ¿Eres jugador y buscas equipo? Este es tu momento para brillar. Compite, destaca y haz que te vean.</p>
+          <a href="https://forms.gle/RDXhhJQXN2CR4S9K6" target="_blank" class="tens-btn">
+            <span data-es="Registrarse" data-en="Sign up">Registrarse</span> →
+          </a>
+        </div>
+
+        <div class="hero-post">
+          <div class="post-label" data-es="Últimas noticias" data-en="Latest news">Últimas noticias</div>
+          <div class="post-frame">
+            <blockquote class="twitter-tweet" data-theme="dark" data-dnt="true" data-width="520">
+              <a href="https://twitter.com/Argea_/status/2048037177469088038"></a>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+      <div class="hero-team-nav">
+        <a href="#roster-vira" class="hero-team-pill active">
+          <span class="pill-tier">Tier 3</span>
+          <span class="pill-name">VIRA</span>
+          <span class="pill-desc" data-es="El equipo principal. Máximo nivel y experiencia dentro de la organización." data-en="The main team. Highest level and experience within the organization.">El equipo principal. Máximo nivel y experiencia dentro de la organización.</span>
+          <span class="pill-arrow">→</span>
+        </a>
+        <a href="#roster-luma" class="hero-team-pill">
+          <span class="pill-tier">Amateur</span>
+          <span class="pill-name">LUMA</span>
+          <span class="pill-desc" data-es="Equipo amateur en construcción. Plantilla creciendo con fichajes pendientes." data-en="Amateur team under construction. Roster growing with pending signings.">Equipo amateur en construcción. Plantilla creciendo con fichajes pendientes.</span>
+          <span class="pill-arrow">→</span>
+        </a>
+        <a href="#roster-nira" class="hero-team-pill">
+          <span class="pill-tier">Academy</span>
+          <span class="pill-name">NIRA</span>
+          <span class="pill-desc" data-es="La academia de Argea. Cantera y talento emergente de la organización." data-en="Argea's academy. Rising talent and youth development of the org.">La academia de Argea. Cantera y talento emergente de la organización.</span>
+          <span class="pill-arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- QUIÉNES SOMOS -->
+    <section class="content-section" id="quienes-somos">
+      <div class="reveal">
+        <div class="section-tag" data-es="Organización" data-en="Organization">Organización</div>
+        <h2 class="section-title" data-es="¿Quiénes <span>Somos</span>?" data-en="Who <span>Are We</span>?">¿Quiénes <span>Somos</span>?</h2>
+      </div>
+      <div class="quienes-grid reveal">
+        <div class="quienes-text">
+          <p data-es="Bienvenidos a Argea, una nueva etapa en los eSports centrada en Valorant. Un equipo donde cada jugador tiene la oportunidad de crecer, competir y demostrar su talento. Con esfuerzo, constancia y trabajo en equipo, construiremos algo sólido y con identidad propia." data-en="Welcome to Argea, a new chapter in eSports focused on Valorant. A team where every player has the opportunity to grow, compete and prove their talent. Through hard work, consistency and teamwork, we will build something solid with its own identity.">Bienvenidos a Argea, una nueva etapa en los eSports centrada en Valorant. Un equipo donde cada jugador tiene la oportunidad de crecer, competir y demostrar su talento. Con esfuerzo, constancia y trabajo en equipo, construiremos algo sólido y con identidad propia.</p>
+        </div>
+        <div class="quienes-pillars">
+          <div class="quienes-pillar">
+            <div class="quienes-pillar-icon">◆</div>
+            <div class="quienes-pillar-title" data-es="Crecimiento" data-en="Growth">Crecimiento</div>
+            <div class="quienes-pillar-desc" data-es="Cada jugador tiene espacio para mejorar y escalar dentro de la organización." data-en="Every player has room to improve and climb within the organization.">Cada jugador tiene espacio para mejorar y escalar dentro de la organización.</div>
+          </div>
+          <div class="quienes-pillar">
+            <div class="quienes-pillar-icon">◆</div>
+            <div class="quienes-pillar-title" data-es="Competición" data-en="Competition">Competición</div>
+            <div class="quienes-pillar-desc" data-es="Tres equipos activos compitiendo en distintas categorías del ecosistema Valorant." data-en="Three active teams competing across different tiers of the Valorant ecosystem.">Tres equipos activos compitiendo en distintas categorías del ecosistema Valorant.</div>
+          </div>
+          <div class="quienes-pillar">
+            <div class="quienes-pillar-icon">◆</div>
+            <div class="quienes-pillar-title" data-es="Identidad" data-en="Identity">Identidad</div>
+            <div class="quienes-pillar-desc" data-es="Una organización con valores claros, staff comprometido y una comunidad real." data-en="An organization with clear values, committed staff and a real community.">Una organización con valores claros, staff comprometido y una comunidad real.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROSTER VIRA -->
+    <section class="roster-section" id="roster-vira">
+      <div class="reveal">
+        <div class="section-tag" data-es="Tier 3 — Principal" data-en="Tier 3 — Main">Tier 3 — Principal</div>
+        <h2 class="section-title"><span>Vira</span></h2>
+      </div>
+      <div class="reveal" style="margin-top:2rem">
+        <div class="staff-row" id="staff-vira">
+          <!-- loaded from Firebase -->
+        </div>
+        <div class="players-grid players-grid-5" id="players-vira">
+          <div class="player-card"><div class="player-role-tag" data-es="Duelista" data-en="Duelist">Duelista</div><div class="player-ign">SLY</div><div class="player-num-bg">01</div></div>
+          <div class="player-card"><div class="player-role-tag">Sentinel</div><div class="player-ign">MONK</div><div class="player-num-bg">02</div></div>
+          <div class="player-card"><div class="player-role-tag" data-es="Initiator / IGL" data-en="Initiator / IGL">Initiator / IGL</div><div class="player-ign">RULY</div><div class="player-num-bg">03</div></div>
+          <div class="player-card"><div class="player-role-tag" data-es="Controller" data-en="Controller">Controller</div><div class="player-ign">PILLAGER</div><div class="player-num-bg">04</div></div>
+          <div class="player-card"><div class="player-role-tag">Flex</div><div class="player-ign">ALMANYAFARESI</div><div class="player-num-bg">05</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROSTER LUMA -->
+    <section class="roster-section" id="roster-luma">
+      <div class="reveal">
+        <div class="section-tag">Amateur</div>
+        <h2 class="section-title"><span>Luma</span></h2>
+      </div>
+      <div class="reveal" style="margin-top:2rem">
+        <div class="staff-row" id="staff-luma">
+          <!-- loaded from Firebase -->
+        </div>
+        <div class="players-grid" id="players-luma" style="grid-template-columns: repeat(4, 1fr) !important; display: grid !important;">
+          <div class="player-card"><div class="player-role-tag" data-es="Centinela / IGL" data-en="Sentinel / IGL">Centinela / IGL</div><div class="player-ign">EXPLIC</div><div class="player-num-bg">01</div></div>
+          <div class="player-card"><div class="player-role-tag" data-es="Controller" data-en="Controller">Controller</div><div class="player-ign">KIIING</div><div class="player-num-bg">02</div></div>
+          <div class="player-card"><div class="player-role-tag" data-es="Iniciador" data-en="Initiator">Iniciador</div><div class="player-ign">H4PPY</div><div class="player-num-bg">03</div></div>
+          <div class="player-card"><div class="player-role-tag" data-es="Duelista" data-en="Duelist">Duelista</div><div class="player-ign">LIL</div><div class="player-num-bg">04</div></div>
+          <div class="pending-card"><div class="pending-diamond"></div><div class="pending-txt" data-es="Fichaje pendiente" data-en="Signing pending">Fichaje pendiente</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROSTER NIRA -->
+    <section class="roster-section" id="roster-nira">
+      <div class="reveal">
+        <div class="section-tag">Academy</div>
+        <h2 class="section-title"><span>Nira</span></h2>
+      </div>
+      <div class="reveal" style="margin-top:2rem">
+        <div class="staff-row" id="staff-nira">
+          <!-- loaded from Firebase -->
+        </div>
+        <div class="players-grid" id="players-nira" style="display: grid !important; grid-template-columns: repeat(7, 1fr) !important;">
+          <div class="player-card"><div class="player-role-tag" data-es="Controller" data-en="Controller">Controller</div><div class="player-ign">TEKAH</div><div class="player-num-bg">01</div></div>
+          <div class="player-card"><div class="player-role-tag" data-es="Centinela / IGL" data-en="Sentinel / IGL">Centinela / IGL</div><div class="player-ign">PATATA</div><div class="player-num-bg">02</div></div>
+          <div class="player-card"><div class="player-role-tag" data-es="Duelista" data-en="Duelist">Duelista</div><div class="player-ign">LYPERY</div><div class="player-num-bg">03</div></div>
+          <div class="player-card"><div class="player-role-tag" data-es="Iniciador" data-en="Initiator">Iniciador</div><div class="player-ign">M4RQZ</div><div class="player-num-bg">04</div></div>
+          <div class="player-card"><div class="player-role-tag" data-es="Centinela" data-en="Sentinel">Centinela</div><div class="player-ign">ALFON</div><div class="player-num-bg">05</div></div>
+          <div class="player-card"><div class="player-role-tag" data-es="Controller" data-en="Controller">Controller</div><div class="player-ign">CARTOCOC</div><div class="player-num-bg">06</div></div>
+          <div class="player-card"><div class="player-role-tag" data-es="Flex" data-en="Flex">Flex</div><div class="player-ign">GONZA</div><div class="player-num-bg">07</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TORNEOS -->
+    <section class="content-section" id="torneos">
+      <div class="section-head reveal">
+        <div class="section-tag" data-es="Competición" data-en="Competition">Competición</div>
+        <h2 class="section-title" data-es="Torneos <span>Participados</span>" data-en="Tournaments <span>Played</span>">Torneos <span>Participados</span></h2>
+      </div>
+      <div class="torneo-group reveal">
+        <div class="torneo-group-header">
+          <span class="torneo-group-name">Vira</span>
+          <div class="tier-badge tier-t3">Tier 3</div>
+        </div>
+        <div class="torneos-list">
+          <div class="torneo-row"><span class="torneo-idx">01</span><span class="torneo-name">VLX</span><span class="torneo-chip">Valorant</span></div>
+          <div class="torneo-row"><span class="torneo-idx">02</span><span class="torneo-name">EVC</span><span class="torneo-chip">Valorant</span></div>
+          <div class="torneo-row"><span class="torneo-idx">03</span><span class="torneo-name">PREMIER <span class="torneo-sub">Invite</span></span><span class="torneo-chip">Valorant</span></div>
+        </div>
+      </div>
+      <div class="torneo-group reveal">
+        <div class="torneo-group-header">
+          <span class="torneo-group-name">Luma</span>
+          <div class="tier-badge tier-ama">Amateur</div>
+        </div>
+        <div class="torneos-list">
+          <div class="torneo-row"><span class="torneo-idx">01</span><span class="torneo-name">SPIKE SERIES</span><span class="torneo-chip">Valorant</span></div>
+          <div class="torneo-row"><span class="torneo-idx">02</span><span class="torneo-name">PREMIER <span class="torneo-sub">Contender</span></span><span class="torneo-chip">Valorant</span></div>
+        </div>
+      </div>
+      <div class="torneo-group reveal">
+        <div class="torneo-group-header">
+          <span class="torneo-group-name">Nira</span>
+          <div class="tier-badge tier-aca">Academy</div>
+        </div>
+        <div class="torneos-list">
+          <div class="torneo-row"><span class="torneo-idx">01</span><span class="torneo-name">CIRCUITO TORMENTA</span><span class="torneo-chip">Valorant</span></div>
+          <div class="torneo-row"><span class="torneo-idx">02</span><span class="torneo-name">PREMIER <span class="torneo-sub">Elite 5</span></span><span class="torneo-chip">Valorant</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRYOUTS -->
+    <section class="content-section" id="tryouts">
+      <div class="reveal">
+        <div class="section-tag">Tryouts</div>
+        <h2 class="section-title" data-es="Únete a <span>Luma</span>" data-en="Join <span>Luma</span>">Únete a <span>Luma</span></h2>
+        <p class="section-desc" data-es="Argea Luma busca su quinto jugador. ¿Tienes lo que se necesita?" data-en="Argea Luma is looking for their fifth player. Do you have what it takes?">Argea Luma busca su quinto jugador. ¿Tienes lo que se necesita?</p>
+      </div>
+      <div class="tryouts-grid reveal">
+        <div class="tryout-col">
+          <div class="tryout-col-label" data-es="Buscamos" data-en="We're looking for">Buscamos</div>
+          <ul class="tryout-list">
+            <li><span class="tryout-icon">◆</span><span data-es="Disponibilidad para jugar en <strong>Contender</strong>" data-en="Availability to play in <strong>Contender</strong>">Disponibilidad para jugar en <strong>Contender</strong></span></li>
+            <li><span class="tryout-icon">◆</span><span data-es="Rol de <strong>Flex</strong> — nos adaptamos como equipo" data-en="<strong>Flex</strong> role — we adapt as a team">Rol de <strong>Flex</strong> — nos adaptamos como equipo</span></li>
+            <li><span class="tryout-icon">◆</span><span data-es="Jugador <strong>coacheable, disciplinado y trabajador</strong>" data-en="<strong>Coachable, disciplined and hardworking</strong> player">Jugador <strong>coacheable, disciplinado y trabajador</strong></span></li>
+            <li><span class="tryout-icon">◆</span><span data-es="Que pueda jugar <strong>Contender</strong>" data-en="Must be able to play <strong>Contender</strong>">Que pueda jugar <strong>Contender</strong></span></li>
+            <li><span class="tryout-icon">◆</span><span data-es="Mínimo <strong>ASC III</strong>" data-en="Minimum <strong>ASC III</strong>">Mínimo <strong>ASC III</strong></span></li>
+          </ul>
+        </div>
+        <div class="tryout-divider"></div>
+        <div class="tryout-col">
+          <div class="tryout-col-label" data-es="Ofrecemos" data-en="We offer">Ofrecemos</div>
+          <ul class="tryout-list">
+            <li><span class="tryout-icon tryout-icon-offer">◆</span><span data-es="Puesto en <strong>Contender</strong>" data-en="Spot in <strong>Contender</strong>">Puesto en <strong>Contender</strong></span></li>
+            <li><span class="tryout-icon tryout-icon-offer">◆</span><span data-es="Competitivos en la <strong>Spike League</strong>" data-en="Competing in <strong>Spike League</strong>">Competitivos en la <strong>Spike League</strong></span></li>
+            <li><span class="tryout-icon tryout-icon-offer">◆</span><span data-es="Org estructurada y sólida" data-en="Structured and solid organization">Org estructurada y sólida</span></li>
+            <li><span class="tryout-icon tryout-icon-offer">◆</span><span data-es="Staff comprometido y coach sólido con experiencia" data-en="Committed staff and experienced coach">Staff comprometido y coach sólido con experiencia</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="reveal" style="margin-top:2.5rem">
+        <a href="https://discord.gg/3uXfdSXyD" target="_blank" class="btn-contact primary" style="display:inline-flex">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.032.056a19.908 19.908 0 0 0 5.993 3.03.077.077 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+          <span data-es="Preguntar en el Discord" data-en="Ask in Discord">Preguntar en el Discord</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="content-section" id="contact" style="text-align:center">
+      <div class="reveal">
+        <div class="section-tag" style="justify-content:center" data-es="Contacto" data-en="Contact">Contacto</div>
+        <h2 class="section-title" data-es="¿Quieres ser <span>Argea</span>?" data-en="Want to be <span>Argea</span>?">¿Quieres ser <span>Argea</span>?</h2>
+        <p class="section-desc" style="margin:0.6rem auto 0;text-align:center;max-width:480px" data-es="Si tienes el nivel y las ganas, hay un sitio para ti. Contacta con nosotros a través de nuestras redes." data-en="If you have the level and the drive, there's a spot for you. Reach out through our socials.">Si tienes el nivel y las ganas, hay un sitio para ti. Contacta con nosotros a través de nuestras redes.</p>
+        <div class="contact-grid">
+          <a href="https://discord.gg/3uXfdSXyD" target="_blank" class="btn-contact primary">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.032.056a19.908 19.908 0 0 0 5.993 3.03.077.077 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+            <span data-es="Únete al Discord" data-en="Join Discord">Únete al Discord</span>
+          </a>
+          <a href="https://x.com/Argea_" target="_blank" class="btn-contact">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span data-es="Síguenos en X" data-en="Follow us on X">Síguenos en X</span>
+          </a>
+          <a href="https://www.twitch.tv/4rgea" target="_blank" class="btn-contact">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+            Twitch
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-brand">
+        <img src="logo_footer.png" alt="Argea" style="height:120px;width:auto;" />
+      </div>
+      <span class="footer-copy" data-es="© 2026 Argea eSports Organization. Todos los derechos reservados." data-en="© 2026 Argea eSports Organization. All rights reserved.">© 2026 Argea eSports Organization. Todos los derechos reservados.</span>
+      <div class="footer-socials">
+        <a href="https://discord.gg/3uXfdSXyD" target="_blank" class="footer-social">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.032.056a19.908 19.908 0 0 0 5.993 3.03.077.077 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+          Discord
+        </a>
+        <a href="https://x.com/Argea_" target="_blank" class="footer-social">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          Twitter
+        </a>
+        <a href="https://www.twitch.tv/4rgea" target="_blank" class="footer-social">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+          Twitch
+        </a>
+      </div>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  // Hide loader when page is ready
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('loader').classList.add('hidden');
+    }, 2000);
+  });
+</script>
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<!-- FIREBASE -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, doc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyA-t4dKjhQBmNSxouHUpxv1ne1GSZdy16I",
+    authDomain: "argea-web.firebaseapp.com",
+    projectId: "argea-web",
+    storageBucket: "argea-web.firebasestorage.app",
+    messagingSenderId: "250120659260",
+    appId: "1:250120659260:web:5ab7227dad19a5dc29be39"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // ── RENDER ROSTER FROM FIREBASE ──
+  function renderRoster(team, data) {
+    const staffEl = document.getElementById(`staff-${team}`);
+    const playersEl = document.getElementById(`players-${team}`);
+    if (!staffEl || !playersEl || !data) return;
+
+    // Staff
+    staffEl.innerHTML = (data.staff || []).map(s => `
+      <div class="staff-card" style="${s.role && s.role.toLowerCase().includes('coach') ? '' : 'border-color:rgba(255,255,255,0.08)'}">
+        <div class="staff-avatar ${s.role && !s.role.toLowerCase().includes('coach') ? 'manager' : ''}">${s.name ? s.name.substring(0,2).toUpperCase() : '??'}</div>
+        <div>
+          <div class="staff-role ${s.role && !s.role.toLowerCase().includes('coach') ? 'mgr' : ''}">${s.role || ''}</div>
+          <div class="staff-name">${(s.name || '').toUpperCase()}</div>
+        </div>
+        <div class="staff-ghost">${s.role ? s.role.split('/')[0].trim().toUpperCase().substring(0,5) : ''}</div>
+      </div>`).join('');
+
+    // Players
+    const players = data.players || [];
+    const count = players.length;
+    const cols = count <= 5 ? count : count === 6 ? 3 : count === 7 ? 7 : 4;
+    playersEl.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    playersEl.innerHTML = players.map((p, i) => `
+      <div class="player-card">
+        <div class="player-role-tag">${p.role || '— por definir —'}</div>
+        <div class="player-ign">${(p.name || '').toUpperCase()}</div>
+        <div class="player-num-bg">0${i+1}</div>
+      </div>`).join('');
+  }
+
+  // ── RENDER NEWS FROM FIREBASE ──
+  function renderNews(items) {
+    const el = document.getElementById('sidebar-news');
+    if (!el || !items || items.length === 0) return;
+    el.innerHTML = items.map(n => `
+      <div class="news-item">
+        <div class="news-date">${n.date || ''}</div>
+        <div class="news-title">${n.title || ''}</div>
+        ${n.tag ? `<div class="news-tag">${n.tag}</div>` : ''}
+      </div>`).join('');
+  }
+
+  // Listen for real-time updates
+  ['vira', 'luma', 'nira'].forEach(team => {
+    onSnapshot(doc(db, 'rosters', team), snap => {
+      if (snap.exists()) renderRoster(team, snap.data());
+    });
+  });
+
+  onSnapshot(doc(db, 'content', 'news'), snap => {
+    if (snap.exists()) renderNews(snap.data().items || []);
+  });
+</script>
+
+<script>
+  // ── REVEAL ON SCROLL ──
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // ── BACK TO TOP ──
+  const backBtn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) backBtn.classList.add('visible');
+    else backBtn.classList.remove('visible');
+  });
+
+  // ── SMOOTH SCROLL for nav links ──
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      const offset = 68; // nav height
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+
+  // ── LANGUAGE TOGGLE ──
+  let currentLang = 'es';
+  function toggleLang() {
+    currentLang = currentLang === 'es' ? 'en' : 'es';
+    const btn = document.getElementById('langBtn');
+    btn.textContent = currentLang === 'es' ? 'EN' : 'ES';
+    btn.classList.toggle('active', currentLang === 'en');
+    document.querySelectorAll('[data-es]').forEach(el => {
+      const text = el.getAttribute('data-' + currentLang);
+      if (text) el.innerHTML = text;
+    });
+    document.documentElement.lang = currentLang;
+  }
+</script>
+
+</body>
+</html>
