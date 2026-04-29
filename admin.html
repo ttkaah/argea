@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ARGEA — Panel Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #0e8f65; --green-light: #16c98a; --green-dim: rgba(14,143,101,0.12);
+      --black: #080a09; --dark: #0e1210; --card: #151917; --card2: #1a201d;
+      --border: rgba(14,143,101,0.2); --text: #d4deda; --muted: #5e7870; --white: #f0f5f2;
+      --red: #e05252; --red-dim: rgba(224,82,82,0.12);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Rajdhani', sans-serif; background: var(--black); color: var(--text); min-height: 100vh; }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 0;
+      background-image: radial-gradient(rgba(14,143,101,0.07) 1px, transparent 1px);
+      background-size: 32px 32px; pointer-events: none;
+    }
+
+    /* ── LOGIN ── */
+    #login-screen {
+      position: fixed; inset: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--black);
+    }
+    .login-box {
+      background: var(--card); border: 1px solid var(--border);
+      padding: 3rem; width: 380px; position: relative; z-index: 1;
+    }
+    .login-logo { text-align: center; margin-bottom: 2rem; }
+    .login-logo img { height: 50px; }
+    .login-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 4px; color: var(--white); text-align: center; margin-bottom: 0.4rem; }
+    .login-sub { font-size: 12px; color: var(--muted); text-align: center; letter-spacing: 1px; margin-bottom: 2rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green-light); margin-bottom: 6px; }
+    .form-group input {
+      width: 100%; background: var(--dark); border: 1px solid var(--border);
+      color: var(--text); padding: 10px 14px; font-family: 'Rajdhani', sans-serif; font-size: 15px;
+      outline: none; transition: border-color 0.2s;
+    }
+    .form-group input:focus { border-color: var(--green-light); }
+    .btn-login {
+      width: 100%; background: var(--green); color: #fff; border: none;
+      font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px;
+      padding: 14px; cursor: pointer; clip-path: polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+      transition: background 0.2s; margin-top: 0.5rem;
+    }
+    .btn-login:hover { background: var(--green-light); }
+    .login-error { color: var(--red); font-size: 13px; text-align: center; margin-top: 1rem; min-height: 20px; }
+
+    /* ── ADMIN LAYOUT ── */
+    #admin-screen { display: none; min-height: 100vh; }
+    .admin-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      height: 60px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem;
+      background: rgba(8,10,9,0.97); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .admin-nav-brand { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 4px; color: var(--white); display: flex; align-items: center; gap: 10px; }
+    .admin-nav-brand span { color: var(--green-light); font-size: 13px; letter-spacing: 2px; }
+    .admin-tabs { display: flex; gap: 0; }
+    .admin-tab {
+      padding: 0 1.4rem; height: 60px; line-height: 60px;
+      font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted); cursor: pointer; border-right: 1px solid var(--border);
+      transition: all 0.2s; background: none; border-top: none; border-left: none; border-bottom: none;
+      font-family: 'Rajdhani', sans-serif;
+    }
+    .admin-tab:first-child { border-left: 1px solid var(--border); }
+    .admin-tab.active, .admin-tab:hover { color: var(--green-light); background: var(--green-dim); }
+    .btn-logout {
+      font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      background: transparent; border: 1px solid var(--border); color: var(--muted);
+      padding: 6px 16px; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-logout:hover { border-color: var(--red); color: var(--red); }
+
+    .admin-content { padding-top: 80px; padding-bottom: 3rem; max-width: 1200px; margin: 0 auto; padding-left: 2rem; padding-right: 2rem; }
+
+    /* ── PANELS ── */
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .panel-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 3px; color: var(--white); margin-bottom: 0.4rem; }
+    .panel-title span { color: var(--green-light); }
+    .panel-sub { font-size: 13px; color: var(--muted); margin-bottom: 2rem; }
+
+    /* ── TEAM SELECTOR ── */
+    .team-selector { display: flex; gap: 2px; margin-bottom: 2rem; }
+    .team-btn {
+      font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px;
+      padding: 10px 28px; border: 1px solid var(--border); background: var(--card);
+      color: var(--muted); cursor: pointer; transition: all 0.2s;
+      clip-path: polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+    }
+    .team-btn.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+    /* ── PLAYER LIST ── */
+    .players-list { display: flex; flex-direction: column; gap: 2px; margin-bottom: 1.5rem; }
+    .player-row {
+      display: grid; grid-template-columns: 1fr 1fr auto;
+      gap: 1rem; align-items: center;
+      background: var(--card); border: 1px solid var(--border); padding: 1rem 1.2rem;
+    }
+    .player-row input {
+      background: var(--dark); border: 1px solid var(--border);
+      color: var(--text); padding: 8px 12px; font-family: 'Rajdhani', sans-serif; font-size: 14px;
+      outline: none; width: 100%; transition: border-color 0.2s;
+    }
+    .player-row input:focus { border-color: var(--green-light); }
+    .player-row input::placeholder { color: var(--muted); }
+    .btn-delete {
+      background: var(--red-dim); border: 1px solid rgba(224,82,82,0.3);
+      color: var(--red); padding: 8px 16px; cursor: pointer;
+      font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1px;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .btn-delete:hover { background: var(--red); color: #fff; }
+    .btn-add {
+      background: var(--green-dim); border: 1px solid var(--border);
+      color: var(--green-light); padding: 10px 24px; cursor: pointer;
+      font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-add:hover { background: var(--green); color: #fff; border-color: var(--green); }
+    .btn-save {
+      background: var(--green); border: none;
+      color: #fff; padding: 12px 32px; cursor: pointer;
+      font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px;
+      clip-path: polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+      transition: background 0.2s; margin-top: 1rem;
+    }
+    .btn-save:hover { background: var(--green-light); }
+    .col-labels { display: grid; grid-template-columns: 1fr 1fr auto; gap: 1rem; padding: 0 1.2rem; margin-bottom: 6px; }
+    .col-label { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green-light); }
+
+    /* ── NEWS ── */
+    .news-list { display: flex; flex-direction: column; gap: 2px; margin-bottom: 1.5rem; }
+    .news-row {
+      display: grid; grid-template-columns: 140px 1fr 120px auto;
+      gap: 1rem; align-items: center;
+      background: var(--card); border: 1px solid var(--border); padding: 1rem 1.2rem;
+    }
+    .news-row input, .news-row select {
+      background: var(--dark); border: 1px solid var(--border);
+      color: var(--text); padding: 8px 12px; font-family: 'Rajdhani', sans-serif; font-size: 14px;
+      outline: none; width: 100%; transition: border-color 0.2s;
+    }
+    .news-row input:focus, .news-row select:focus { border-color: var(--green-light); }
+    .news-row select option { background: var(--dark); }
+
+    .btn-import {
+      background: rgba(14,143,101,0.08); border: 1px solid var(--border);
+      color: var(--green-light); padding: 10px 20px; cursor: pointer;
+      font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .btn-import:hover { background: var(--green-dim); border-color: var(--green-light); }
+
+    /* ── STATUS ── */
+    .save-status {
+      display: inline-block; margin-left: 1rem;
+      font-size: 12px; font-weight: 700; letter-spacing: 1px;
+      color: var(--green-light); opacity: 0; transition: opacity 0.3s;
+    }
+    .save-status.show { opacity: 1; }
+
+    /* ── LOADING ── */
+    .loading { color: var(--muted); font-size: 13px; padding: 2rem 0; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+    .staff-section-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--muted); margin-bottom: 1rem; margin-top: 1.5rem; }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <img src="logo_nav.png" alt="Argea" onerror="this.style.display='none'" />
+    </div>
+    <div class="login-title">Panel <span style="color:var(--green-light)">Admin</span></div>
+    <div class="login-sub">Acceso restringido — Solo staff autorizado</div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="login-email" placeholder="admin@argea.gg" />
+    </div>
+    <div class="form-group">
+      <label>Contraseña</label>
+      <input type="password" id="login-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()" />
+    </div>
+    <button class="btn-login" onclick="doLogin()">Entrar</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="admin-screen">
+  <nav class="admin-nav">
+    <div class="admin-nav-brand">ARGEA <span>ADMIN</span></div>
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="showPanel('roster')">Roster</button>
+      <button class="admin-tab" onclick="showPanel('news')">Noticias</button>
+    </div>
+    <button class="btn-logout" onclick="doLogout()">Cerrar sesión</button>
+  </nav>
+
+  <div class="admin-content">
+
+    <!-- ROSTER PANEL -->
+    <div class="panel active" id="panel-roster">
+      <div class="panel-title">Gestionar <span>Roster</span></div>
+      <div class="panel-sub">Edita jugadores y roles de cada equipo. Los cambios se aplican en la web al instante.</div>
+
+      <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; flex-wrap:wrap;">
+        <div class="team-selector" style="margin-bottom:0">
+          <button class="team-btn active" onclick="selectTeam('vira', this)">Vira</button>
+          <button class="team-btn" onclick="selectTeam('luma', this)">Luma</button>
+          <button class="team-btn" onclick="selectTeam('nira', this)">Nira</button>
+        </div>
+        <button class="btn-import" onclick="importDefaultData()">⬇ Importar datos actuales</button>
+        <span class="save-status" id="import-status" style="margin-left:0">✓ Importado</span>
+      </div>
+
+      <div id="roster-editor" class="loading">Cargando...</div>
+    </div>
+
+    <!-- NEWS PANEL -->
+    <div class="panel" id="panel-news">
+      <div class="panel-title">Gestionar <span>Noticias</span></div>
+      <div class="panel-sub">Añade, edita o elimina las noticias del panel lateral. Se actualizan en tiempo real.</div>
+
+      <div class="col-labels" style="grid-template-columns: 120px 1fr 100px auto;">
+        <span class="col-label">Fecha</span>
+        <span class="col-label">Título</span>
+        <span class="col-label">Tag</span>
+        <span class="col-label"></span>
+      </div>
+      <div class="news-list" id="news-list"></div>
+      <button class="btn-add" onclick="addNews()">+ Añadir noticia</button>
+      <br>
+      <button class="btn-save" onclick="saveNews()">Guardar noticias <span class="save-status" id="news-status">✓ Guardado</span></button>
+    </div>
+
+  </div>
+</div>
+
+<!-- FIREBASE -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getFirestore, doc, setDoc, getDoc, collection, getDocs, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyA-t4dKjhQBmNSxouHUpxv1ne1GSZdy16I",
+    authDomain: "argea-web.firebaseapp.com",
+    projectId: "argea-web",
+    storageBucket: "argea-web.firebasestorage.app",
+    messagingSenderId: "250120659260",
+    appId: "1:250120659260:web:5ab7227dad19a5dc29be39"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  let currentTeam = 'vira';
+
+  // ── DEFAULT DATA ──
+  const defaultRosters = {
+    vira: {
+      staff: [
+        { name: 'Saber', role: 'Coach' },
+        { name: 'iNk', role: 'Manager' },
+        { name: 'Miriam', role: 'Encargada' },
+        { name: 'Óscar', role: 'Encargado' }
+      ],
+      players: [
+        { name: 'Sly', role: 'Duelista' },
+        { name: 'Monk', role: 'Sentinel' },
+        { name: 'Ruly', role: 'Initiator / IGL' },
+        { name: 'Pillager', role: 'Controller' },
+        { name: 'Almanyafaresi', role: 'Flex' }
+      ]
+    },
+    luma: {
+      staff: [
+        { name: 'Ferri', role: 'Coach' }
+      ],
+      players: [
+        { name: 'Explic', role: 'Centinela / IGL' },
+        { name: 'Kiiing', role: 'Controller' },
+        { name: 'H4PPY', role: 'Iniciador' },
+        { name: 'Lil', role: 'Duelista' }
+      ]
+    },
+    nira: {
+      staff: [
+        { name: 'Aina', role: 'Coach / CEO' },
+        { name: 'Colty', role: 'Assistant / Manager' }
+      ],
+      players: [
+        { name: 'Tekah', role: 'Controller' },
+        { name: 'Patata', role: 'Centinela / IGL' },
+        { name: 'Lypery', role: 'Duelista' },
+        { name: 'M4RQZ', role: 'Iniciador' },
+        { name: 'Alfon', role: 'Centinela' },
+        { name: 'Cartococ', role: 'Controller' },
+        { name: 'Gonza', role: 'Flex' }
+      ]
+    }
+  };
+
+  window.importDefaultData = async () => {
+    if (!confirm('¿Importar los datos actuales del roster? Esto sobreescribirá los datos existentes en Firebase.')) return;
+    for (const team of ['vira', 'luma', 'nira']) {
+      await setDoc(doc(db, 'rosters', team), defaultRosters[team]);
+    }
+    const s = document.getElementById('import-status');
+    s.classList.add('show');
+    setTimeout(() => s.classList.remove('show'), 3000);
+    loadRoster(currentTeam);
+  };
+
+  // ── AUTH ──
+  window.doLogin = async () => {
+    const email = document.getElementById('login-email').value;
+    const pass = document.getElementById('login-pass').value;
+    const errEl = document.getElementById('login-error');
+    errEl.textContent = '';
+    try {
+      await signInWithEmailAndPassword(auth, email, pass);
+    } catch(e) {
+      errEl.textContent = 'Email o contraseña incorrectos.';
+    }
+  };
+
+  window.doLogout = () => signOut(auth);
+
+  onAuthStateChanged(auth, user => {
+    document.getElementById('login-screen').style.display = user ? 'none' : 'flex';
+    document.getElementById('admin-screen').style.display = user ? 'block' : 'none';
+    if (user) {
+      loadRoster(currentTeam);
+      loadNews();
+    }
+  });
+
+  // ── PANELS ──
+  window.showPanel = (name) => {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    event.target.classList.add('active');
+  };
+
+  // ── ROSTER ──
+  window.selectTeam = (team, btn) => {
+    currentTeam = team;
+    document.querySelectorAll('.team-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    loadRoster(team);
+  };
+
+  async function loadRoster(team) {
+    const el = document.getElementById('roster-editor');
+    el.innerHTML = '<div class="loading">Cargando...</div>';
+    const snap = await getDoc(doc(db, 'rosters', team));
+    const data = snap.exists() ? snap.data() : { staff: [], players: [] };
+    renderRoster(data);
+  }
+
+  function renderRoster(data) {
+    const el = document.getElementById('roster-editor');
+    const staff = data.staff || [];
+    const players = data.players || [];
+
+    let html = `
+      <div class="staff-section-title">Staff</div>
+      <div class="col-labels"><span class="col-label">Nombre</span><span class="col-label">Rol</span><span class="col-label"></span></div>
+      <div class="players-list" id="staff-list">`;
+    staff.forEach((s, i) => {
+      html += `<div class="player-row">
+        <input type="text" placeholder="Nombre" value="${s.name || ''}" onchange="updateStaff(${i}, 'name', this.value)" />
+        <input type="text" placeholder="Rol (Coach, Manager...)" value="${s.role || ''}" onchange="updateStaff(${i}, 'role', this.value)" />
+        <button class="btn-delete" onclick="deleteStaff(${i})">Eliminar</button>
+      </div>`;
+    });
+    html += `</div>
+      <button class="btn-add" onclick="addStaff()">+ Añadir staff</button>
+      <hr class="section-divider">
+      <div class="staff-section-title">Jugadores</div>
+      <div class="col-labels"><span class="col-label">Nick</span><span class="col-label">Rol</span><span class="col-label"></span></div>
+      <div class="players-list" id="players-list">`;
+    players.forEach((p, i) => {
+      html += `<div class="player-row">
+        <input type="text" placeholder="Nick" value="${p.name || ''}" onchange="updatePlayer(${i}, 'name', this.value)" />
+        <input type="text" placeholder="Rol (Duelista, Controller...)" value="${p.role || ''}" onchange="updatePlayer(${i}, 'role', this.value)" />
+        <button class="btn-delete" onclick="deletePlayer(${i})">Eliminar</button>
+      </div>`;
+    });
+    html += `</div>
+      <button class="btn-add" onclick="addPlayer()">+ Añadir jugador</button>
+      <br>
+      <button class="btn-save" onclick="saveRoster()">Guardar cambios <span class="save-status" id="roster-status">✓ Guardado</span></button>`;
+    el.innerHTML = html;
+    window._rosterData = data;
+  }
+
+  window.updatePlayer = (i, key, val) => { window._rosterData.players[i][key] = val; };
+  window.updateStaff = (i, key, val) => { window._rosterData.staff[i][key] = val; };
+  window.deletePlayer = (i) => { window._rosterData.players.splice(i, 1); renderRoster(window._rosterData); };
+  window.deleteStaff = (i) => { window._rosterData.staff.splice(i, 1); renderRoster(window._rosterData); };
+  window.addPlayer = () => { window._rosterData.players.push({ name: '', role: '' }); renderRoster(window._rosterData); };
+  window.addStaff = () => { window._rosterData.staff.push({ name: '', role: '' }); renderRoster(window._rosterData); };
+
+  window.saveRoster = async () => {
+    await setDoc(doc(db, 'rosters', currentTeam), window._rosterData);
+    const s = document.getElementById('roster-status');
+    s.classList.add('show');
+    setTimeout(() => s.classList.remove('show'), 2500);
+  };
+
+  // ── NEWS ──
+  let newsData = [];
+
+  async function loadNews() {
+    const snap = await getDoc(doc(db, 'content', 'news'));
+    newsData = snap.exists() ? (snap.data().items || []) : [];
+    renderNews();
+  }
+
+  function renderNews() {
+    const el = document.getElementById('news-list');
+    let html = '';
+    newsData.forEach((n, i) => {
+      html += `<div class="news-row">
+        <input type="text" placeholder="Abr 2026" value="${n.date || ''}" onchange="updateNews(${i},'date',this.value)" />
+        <input type="text" placeholder="Título de la noticia..." value="${n.title || ''}" onchange="updateNews(${i},'title',this.value)" />
+        <input type="text" placeholder="Tag" value="${n.tag || ''}" onchange="updateNews(${i},'tag',this.value)" />
+        <button class="btn-delete" onclick="deleteNews(${i})">Eliminar</button>
+      </div>`;
+    });
+    el.innerHTML = html;
+  }
+
+  window.updateNews = (i, key, val) => { newsData[i][key] = val; };
+  window.deleteNews = (i) => { newsData.splice(i, 1); renderNews(); };
+  window.addNews = () => { newsData.unshift({ date: '', title: '', tag: '' }); renderNews(); };
+
+  window.saveNews = async () => {
+    await setDoc(doc(db, 'content', 'news'), { items: newsData });
+    const s = document.getElementById('news-status');
+    s.classList.add('show');
+    setTimeout(() => s.classList.remove('show'), 2500);
+  };
+</script>
+
+</body>
+</html>
